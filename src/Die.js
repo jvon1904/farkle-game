@@ -50,10 +50,14 @@ export default class Die {
     this.active = true;
     this.selected = false;
     this.element.classList.remove("selected");
-    this.board.potentialScore = this.board.calculatePotentialScore(
+    this.board.game.activePlayer.turnScore = this.board.calculatePotentialScore(
       this.board.selectedDice
     );
     this.board.activeDiceContainer.append(this.element);
+    this.board.updateTurnScore();
+    if (this.board.selectedDice.length === 0) {
+      this.board.ready = false;
+    }
   }
 
   drawDie() {

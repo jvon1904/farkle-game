@@ -3,6 +3,7 @@ import Board from "./Board.js";
 
 export default class Game {
   constructor(names) {
+    console.log(names);
     if (names.some((name) => name === "")) throw "Name cannot be blank";
     this.players = this.setPlayers(names);
     this.board = new Board(this);
