@@ -3,10 +3,11 @@ import Board from "./Board.js";
 
 export default class Game {
   constructor(names) {
-    console.log(names);
     if (names.some((name) => name === "")) throw "Name cannot be blank";
+    this.winningLimit = 10000;
     this.players = this.setPlayers(names);
     this.board = new Board(this);
+    this.winContainer = document.getElementById("win-container");
   }
 
   startGame() {
@@ -19,8 +20,18 @@ export default class Game {
     this.board.remove();
   }
 
+  winGame() {
+    this.winContainer.innerHTML = `<h1>${this.activePlayer.name} wins with a score of ${this.activePlayer.totalScore}!</h1>`;
+    this.winContainer.classList.remove("hidden");
+    this.endGame();
+  }
+
   endTurn() {
     this.activePlayer.totalScore += this.activePlayer.turnScore;
+    if (this.activePlayer.totalScore >= this.winningLimit) {
+      this.winGame();
+      return;
+    }
     this.board.farkle = false;
     this.board.ready = true;
     this.board.resetDice();
