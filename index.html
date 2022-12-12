@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Practice</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <div id="title">
+        <h2>Farkle!</h2>
+      </div>
+      <div class="switch-container">
+        <div class="switch">
+          <div class="circle"></div>
+        </div>
+      </div>
+    </header>
+    <div id="start-wrapper">
+      <label for="name-input">Name:</label>
+      <input type="text" id="name-input" maxlength="20" />
+      <button id="btn-start" class>Start</button>
+    </div>
+    <section id="play-area">
+      <div id="message-container"></div>
+      <div id="active-dice-container"></div>
+      <div id="selected-dice-container"></div>
+    </section>
+    <div id="btn-wrapper"></div>
+    <div id="footer">
+      <h1>Player: <span id="player-name-display"></span></h1>
+      <h1>Turn Score: <span id="turn-score-display">0</span></h1>
+      <h1>Total Score: <span id="total-score-display">0</span></h1>
+    </div>
+  </body>
+</html>
+<script src="src/index.js" type="module"></script>

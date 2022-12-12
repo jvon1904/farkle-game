@@ -1,0 +1,13 @@
+{
+  "name": "farkle_game",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo 'No tests'"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

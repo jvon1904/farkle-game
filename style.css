@@ -1,0 +1,437 @@
+body {
+  margin: 0;
+  padding: 0;
+  transition: 0.1s;
+  font-family: sans-serif;
+}
+.dark {
+  background-color: black;
+  transition: 0.1s;
+}
+.hidden {
+  display: none !important;
+}
+.success {
+  box-shadow: 0px 0px 10px purple;
+}
+header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  padding: 10px;
+  position: fixed;
+  width: 100%;
+}
+h1,
+h2,
+h3 {
+  margin: 0;
+}
+
+#title {
+  margin: 1rem;
+  font-size: 2.5rem;
+  letter-spacing: -0.25rem;
+  text-transform: uppercase;
+  color: hsl(40, 75%, 50%);
+}
+
+.switch-container {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
+.switch {
+  left: -30px;
+  position: relative;
+  width: 60px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  border-radius: 15px;
+  transition: 0.1s;
+  background-color: hsl(200, 2%, 75%);
+  box-shadow: inset 1px 1px 10px black, 0px 0px 1px black;
+}
+
+.switchOn {
+  transition: 0.1s;
+  background-color: hsl(200, 75%, 85%);
+}
+.circle {
+  position: absolute;
+  border-radius: 50%;
+  background-color: hsl(200, 100%, 2%);
+  width: 28px;
+  height: 28px;
+  left: 2px;
+  transition: 0.1s;
+}
+
+.circleOn {
+  position: absolute;
+  left: 30px;
+  transition: 0.1s;
+}
+
+#play-area {
+  position: relative;
+  max-height: 500px;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  top: 100px;
+}
+
+#message-container {
+  display: flex;
+  justify-content: center;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+
+#active-dice-container,
+.selected-dice-group {
+  padding: 0.5rem;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  column-gap: 1rem;
+  row-gap: 1rem;
+  margin: 0.5rem;
+}
+.selected-dice-group {
+  display: flex;
+}
+
+.dice.selected {
+  height: 50px;
+  width: 50px;
+  padding: 10px;
+  border-radius: 2.5px;
+}
+
+.dice.selected > .row > .dot {
+  height: 10px;
+  width: 10px;
+  box-shadow: inset 2.5px 2.5px 5px black;
+}
+
+button {
+  margin: 1rem;
+  padding: 0.75rem 2rem;
+  font-size: 1.25rem;
+  border-radius: 10px;
+  border: none;
+  box-shadow: 0px 3px 0px;
+  background-color: hsl(200, 50%, 95%);
+}
+
+button:hover {
+  cursor: pointer;
+  box-shadow: 0px 3px 0px, 0px 3px 3px;
+}
+
+input {
+  margin: 1rem;
+  padding: 0.75rem 0.75rem;
+  font-size: 1.25rem;
+  border-radius: 10px;
+  border: none;
+  box-shadow: 0px 3px 0px;
+  background-color: hsl(200, 50%, 95%);
+}
+
+input[type="number"] {
+  width: 50px;
+}
+
+input:focus {
+  outline: none;
+  border: none;
+}
+
+input:hover {
+  box-shadow: 0px 3px 0px, 0px 3px 3px;
+}
+
+#start-wrapper {
+  padding: 3rem;
+  font-size: 1.5rem;
+  border-radius: 25px;
+  box-shadow: 0px 10px 30px;
+  background-color: hsl(40, 75%, 50%);
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -75%);
+  display: flex;
+  align-items: center;
+}
+
+.text {
+  font-size: 2rem;
+  font-style: italic;
+  color: hsl(200, 50%, 95%);
+}
+
+#btn-wrapper {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  bottom: 100px;
+}
+
+.dice {
+  height: 100px;
+  width: 100px;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 20px;
+  background-color: beige;
+  box-shadow: 3px 3px black;
+  /* transition: 0.5s; */
+}
+
+.dice:hover {
+  box-shadow: 3px 3px black, 3px 3px 3px black;
+  transition: 0s;
+  cursor: pointer;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
+.dot {
+  border-radius: 50%;
+  height: 20px;
+  width: 20px;
+  box-shadow: inset 5px 5px 10px black;
+  background-color: hsl(200, 0%, 50%);
+}
+
+/* Dice 1 */
+
+.dot-top-left.dice-1 {
+  visibility: hidden;
+}
+.dot-top-middle.dice-1 {
+  visibility: hidden;
+}
+.dot-top-right.dice-1 {
+  visibility: hidden;
+}
+.dot-middle-left.dice-1 {
+  visibility: hidden;
+}
+.dot-middle-middle.dice-1 {
+  display: block;
+  transition: 0.1s;
+}
+.dot-middle-right.dice-1 {
+  visibility: hidden;
+}
+.dot-bottom-left.dice-1 {
+  visibility: hidden;
+}
+.dot-bottom-middle.dice-1 {
+  visibility: hidden;
+}
+.dot-bottom-right.dice-1 {
+  visibility: hidden;
+}
+
+/* dice 2 */
+
+.dot-top-left.dice-2 {
+  display: block;
+  transition: 0.1s;
+}
+.dot-top-middle.dice-2 {
+  visibility: hidden;
+}
+.dot-top-right.dice-2 {
+  visibility: hidden;
+}
+.dot-middle-left.dice-2 {
+  visibility: hidden;
+}
+.dot-middle-middle.dice-2 {
+  visibility: hidden;
+}
+.dot-middle-right.dice-2 {
+  visibility: hidden;
+}
+.dot-bottom-left.dice-2 {
+  visibility: hidden;
+}
+.dot-bottom-middle.dice-2 {
+  visibility: hidden;
+}
+.dot-bottom-right.dice-2 {
+  display: block;
+  transition: 0.1s;
+}
+
+/* dice 3 */
+
+.dot-top-left.dice-3 {
+  display: block;
+  transition: 0.1s;
+}
+.dot-top-middle.dice-3 {
+  visibility: hidden;
+}
+.dot-top-right.dice-3 {
+  visibility: hidden;
+}
+.dot-middle-left.dice-3 {
+  visibility: hidden;
+}
+.dot-middle-left.dice-3 {
+  display: block;
+  transition: 0.1s;
+}
+.dot-middle-right.dice-3 {
+  visibility: hidden;
+}
+.dot-bottom-left.dice-3 {
+  visibility: hidden;
+}
+.dot-bottom-middle.dice-3 {
+  visibility: hidden;
+}
+.dot-bottom-right.dice-3 {
+  display: block;
+  transition: 0.1s;
+}
+
+/* dice 4 */
+
+.dot-top-left.dice-4 {
+  display: block;
+  transition: 0.1s;
+}
+.dot-top-middle.dice-4 {
+  visibility: hidden;
+}
+.dot-top-right.dice-4 {
+  display: block;
+  transition: 0.1s;
+}
+.dot-middle-left.dice-4 {
+  visibility: hidden;
+}
+.dot-middle-middle.dice-4 {
+  visibility: hidden;
+}
+.dot-middle-right.dice-4 {
+  visibility: hidden;
+}
+.dot-bottom-left.dice-4 {
+  display: block;
+  transition: 0.1s;
+}
+.dot-bottom-middle.dice-4 {
+  visibility: hidden;
+}
+.dot-bottom-right.dice-4 {
+  display: block;
+  transition: 0.1s;
+}
+
+/* dice 5 */
+
+.dot-top-left.dice-5 {
+  display: block;
+  transition: 0.1s;
+}
+.dot-top-middle.dice-5 {
+  visibility: hidden;
+}
+.dot-top-right.dice-5 {
+  display: block;
+  transition: 0.1s;
+}
+.dot-middle-left.dice-5 {
+  visibility: hidden;
+}
+.dot-middle-middle.dice-5 {
+  display: block;
+  transition: 0.1s;
+}
+.dot-middle-right.dice-5 {
+  visibility: hidden;
+}
+.dot-bottom-left.dice-5 {
+  display: block;
+  transition: 0.1s;
+}
+.dot-bottom-middle.dice-5 {
+  visibility: hidden;
+}
+.dot-bottom-right.dice-5 {
+  display: block;
+  transition: 0.1s;
+}
+
+/* dice 6 */
+
+.dot-top-left.dice-6 {
+  display: block;
+  transition: 0.1s;
+}
+.dot-top-middle.dice-6 {
+  visibility: hidden;
+}
+.dot-top-right.dice-6 {
+  display: block;
+  transition: 0.1s;
+}
+.dot-middle-left.dice-6 {
+  display: block;
+  transition: 0.1s;
+}
+.dot-middle-middle.dice-6 {
+  visibility: hidden;
+}
+.dot-middle-right.dice-6 {
+  display: block;
+  transition: 0.1s;
+}
+.dot-bottom-left.dice-6 {
+  display: block;
+  transition: 0.1s;
+}
+.dot-bottom-middle.dice-6 {
+  visibility: hidden;
+}
+.dot-bottom-right.dice-6 {
+  display: block;
+  transition: 0.1s;
+}
+
+#footer {
+  position: fixed;
+  bottom: 0px;
+  display: flex;
+  height: 100px;
+  box-shadow: 0 0 3px black;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.dark > #footer {
+  color: white;
+  background-color: #111;
+}
