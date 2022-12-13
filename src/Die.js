@@ -27,9 +27,11 @@ export default class Die {
   select() {
     this.board.clearMessage();
     if (this.board.farkle) {
+      this.board.game.soundEffects.error();
       this.board.printFarkleMessage();
       return;
     }
+    this.board.game.soundEffects.select();
     this.active = false;
     this.selected = true;
     this.board.activeSelectedDiceGroup.append(this.element);
@@ -44,9 +46,11 @@ export default class Die {
   deselect() {
     this.board.clearMessage();
     if (this.board.farkle) {
+      this.board.game.soundEffects.error();
       this.board.printFarkleMessage();
       return;
     }
+    this.board.game.soundEffects.deselect();
     this.active = true;
     this.selected = false;
     this.element.classList.remove("selected");

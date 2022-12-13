@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Farkle Game</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Staatliches&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <main>
+      <div class="play-area">
+        <h1 class="message" id="message">Click New Game!</h1>
+        <!-- dice -->
+        <div class="dice-area">
+          <div class="dice" id="dice-a">
+            <div class="row-dots top-dots">
+              <div class="dot left-dot"></div>
+              <div class="dot center-dot invisible-dot"></div>
+              <div class="dot right-dot"></div>
+            </div>
+            <div class="row-dots middle-dots">
+              <div class="dot left-dot"></div>
+              <div class="dot center-dot invisible-dot"></div>
+              <div class="dot right-dot"></div>
+            </div>
+            <div class="row-dots bottom-dots">
+              <div class="dot left-dot"></div>
+              <div class="dot center-dot invisible-dot"></div>
+              <div class="dot right-dot"></div>
+            </div>
+          </div>
+          <div class="dice" id="dice-b">
+            <div class="row-dots top-dots">
+              <div class="dot left-dot"></div>
+              <div class="dot center-dot invisible-dot"></div>
+              <div class="dot right-dot"></div>
+            </div>
+            <div class="row-dots middle-dots">
+              <div class="dot left-dot invisible-dot"></div>
+              <div class="dot center-dot"></div>
+              <div class="dot right-dot invisible-dot"></div>
+            </div>
+            <div class="row-dots bottom-dots">
+              <div class="dot left-dot"></div>
+              <div class="dot center-dot invisible-dot"></div>
+              <div class="dot right-dot"></div>
+            </div>
+          </div>
+          <div class="dice" id="dice-c">
+            <div class="row-dots top-dots">
+              <div class="dot left-dot"></div>
+              <div class="dot center-dot invisible-dot"></div>
+              <div class="dot right-dot"></div>
+            </div>
+            <div class="row-dots middle-dots invisible-row">
+              <div class="dot left-dot"></div>
+              <div class="dot center-dot"></div>
+              <div class="dot right-dot"></div>
+            </div>
+            <div class="row-dots bottom-dots">
+              <div class="dot left-dot"></div>
+              <div class="dot center-dot invisible-dot"></div>
+              <div class="dot right-dot"></div>
+            </div>
+          </div>
+          <div class="dice" id="dice-d">
+            <div class="row-dots top-dots">
+              <div class="dot left-dot"></div>
+              <div class="dot center-dot invisible-dot"></div>
+              <div class="dot right-dot invisible-dot"></div>
+            </div>
+            <div class="row-dots middle-dots">
+              <div class="dot left-dot invisible-dot"></div>
+              <div class="dot center-dot"></div>
+              <div class="dot right-dot invisible-dot"></div>
+            </div>
+            <div class="row-dots bottom-dots">
+              <div class="dot left-dot invisible-dot"></div>
+              <div class="dot center-dot invisible-dot"></div>
+              <div class="dot right-dot"></div>
+            </div>
+          </div>
+          <div class="dice" id="dice-e">
+            <div class="row-dots top-dots">
+              <div class="dot left-dot invisible-dot"></div>
+              <div class="dot center-dot invisible-dot"></div>
+              <div class="dot right-dot"></div>
+            </div>
+            <div class="row-dots middle-dots invisible-row">
+              <div class="dot left-dot"></div>
+              <div class="dot center-dot"></div>
+              <div class="dot right-dot"></div>
+            </div>
+            <div class="row-dots bottom-dots">
+              <div class="dot left-dot"></div>
+              <div class="dot center-dot invisible-dot"></div>
+              <div class="dot right-dot invisible-dot"></div>
+            </div>
+          </div>
+          <div class="dice" id="dice-f">
+            <div class="row-dots top-dots invisible-row">
+              <div class="dot left-dot"></div>
+              <div class="dot center-dot invisible-dot"></div>
+              <div class="dot right-dot"></div>
+            </div>
+            <div class="row-dots middle-dots">
+              <div class="dot left-dot invisible-dot"></div>
+              <div class="dot center-dot"></div>
+              <div class="dot right-dot invisible-dot"></div>
+            </div>
+            <div class="row-dots bottom-dots invisible-row">
+              <div class="dot left-dot"></div>
+              <div class="dot center-dot invisible-dot"></div>
+              <div class="dot right-dot"></div>
+            </div>
+          </div>
+        </div>
+        <div id="score-section">
+          <div class="score running-score">
+            <h2 id="running-score-display">0</h2>
+          </div>
+          <div class="score total-score">
+            <h2 id="total-score-display">0</h2>
+          </div>
+        </div>
+        <div class="btn-area">
+          <button class="btn btn-begin" id="begin-button">New Game</button>
+          <button class="btn btn-roll" id="roll-button">Roll Dice</button>
+          <button class="btn btn-hold hide" id="hold-button">Hold Score</button>
+        </div>
+      </div>
+    </main>
+    <script src="script.js"></script>
+  </body>
+</html>

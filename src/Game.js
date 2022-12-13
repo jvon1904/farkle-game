@@ -1,5 +1,6 @@
 import Player from "./Player.js";
 import Board from "./Board.js";
+import SoundEffects from "./SoundEffects.js";
 
 export default class Game {
   constructor(names) {
@@ -8,25 +9,30 @@ export default class Game {
     this.players = this.setPlayers(names);
     this.board = new Board(this);
     this.winContainer = document.getElementById("win-container");
+    this.soundEffects = new SoundEffects();
   }
 
   startGame() {
+    this.soundEffects.startGame();
     this.players[0].activate();
     this.board.render();
     console.log(this);
   }
 
   endGame() {
+    this.soundEffects.endGame();
     this.board.remove();
   }
 
   winGame() {
+    this.soundEffects.winGame();
     this.winContainer.innerHTML = `<h1>${this.activePlayer.name} wins with a score of ${this.activePlayer.totalScore}!</h1>`;
     this.winContainer.classList.remove("hidden");
     this.endGame();
   }
 
   endTurn() {
+    this.soundEffects.endTurn();
     this.activePlayer.totalScore += this.activePlayer.turnScore;
     if (this.activePlayer.totalScore >= this.winningLimit) {
       this.winGame();
@@ -43,14 +49,17 @@ export default class Game {
 
   rollDice() {
     if (this.board.activeDice.length === 0) {
+      this.soundEffects.error();
       this.board.messageContainer.textContent = "No dice to roll.";
       return;
     }
     if (this.board.farkle) {
+      this.soundEffects.error();
       this.board.printFarkleMessage();
       return;
     }
     if (!this.board.ready) {
+      this.soundEffects.error();
       this.board.messageContainer.textContent =
         "You must select at least one die.";
       return;
@@ -59,10 +68,12 @@ export default class Game {
       this.board.selectedDice.length > 0 &&
       this.activePlayer.turnScore <= this.activePlayer.previousTurnScore
     ) {
+      this.soundEffects.error();
       this.board.messageContainer.textContent =
         "You must select scoring dice before rolling again.";
       return;
     }
+    this.soundEffects.roll();
     this.board.activeDice.forEach((die) => {
       die.roll();
     });
@@ -77,6 +88,7 @@ export default class Game {
   }
 
   farkle() {
+    this.soundEffects.farkle();
     this.board.farkle = true;
     this.board.ready = false;
     this.board.messageContainer.textContent = "You got a farkle!";
