@@ -19,16 +19,11 @@ export default class Board {
     this.endGameButton = this.setEndGameButton();
     this.endTurnButton = this.setEndTurnButton();
     this.rollDiceButton = this.setRollDiceButton();
-    this.playerName = this.setPlayerName();
-    this.turnScore = this.setTurnScore();
-    this.totalScore = this.setTotalScore();
+    this.footer = document.getElementById("footer");
   }
 
   render() {
     this.startWrapper.classList.add("hidden");
-    this.updatePlayerName();
-    this.updateTurnScore();
-    this.updateTotalScore();
     this.activeDice.forEach((die) => {
       this.activeDiceContainer.appendChild(die.element);
     });
@@ -38,12 +33,10 @@ export default class Board {
     this.dice = [];
     this.activeDiceContainer.innerHTML = "";
     this.selectedDiceContainer.innerHTML = "";
+    this.footer.innerHTML = "";
     this.endGameButton.remove();
     this.endTurnButton.remove();
     this.rollDiceButton.remove();
-    this.playerName.textContent = "";
-    this.turnScore.textContent = "";
-    this.totalScore.textContent = "";
     this.startWrapper.classList.remove("hidden");
   }
 
@@ -60,9 +53,6 @@ export default class Board {
     this.dice = [];
     this.activeDiceContainer.innerHTML = "";
     this.selectedDiceContainer.innerHTML = "";
-    this.updatePlayerName();
-    this.updateTurnScore();
-    this.updateTotalScore();
     this.dice = this.setDice();
     this.activeDice.forEach((die) => {
       this.activeDiceContainer.appendChild(die.element);
@@ -132,41 +122,6 @@ export default class Board {
     this.buttonWrapper.appendChild(element);
 
     return element;
-  }
-
-  // Render player & score information in footer
-
-  // Active Player Name
-  setPlayerName() {
-    let element = document.getElementById("player-name-display");
-
-    return element;
-  }
-
-  updatePlayerName() {
-    this.playerName.textContent = this.game.activePlayer.name;
-  }
-
-  // Active Player Turn Score
-  setTurnScore() {
-    let element = document.getElementById("turn-score-display");
-
-    return element;
-  }
-
-  updateTurnScore() {
-    this.turnScore.textContent = this.game.activePlayer.turnScore;
-  }
-
-  // Active Player Total Score
-  setTotalScore() {
-    let element = document.getElementById("total-score-display");
-
-    return element;
-  }
-
-  updateTotalScore() {
-    this.totalScore.textContent = this.game.activePlayer.totalScore;
   }
 
   clearMessage() {

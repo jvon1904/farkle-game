@@ -39,8 +39,8 @@ startButton.addEventListener("click", () => {
     inputs.forEach((input) => (input.value = ""));
     game.startGame();
   } catch (e) {
-    console.log(e);
     messageContainer.textContent = e;
+    console.log(e);
   }
 });
 

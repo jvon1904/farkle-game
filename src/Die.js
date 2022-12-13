@@ -39,7 +39,6 @@ export default class Die {
     this.board.game.activePlayer.turnScore = this.board.calculatePotentialScore(
       this.board.selectedDice
     );
-    this.board.updateTurnScore();
     this.board.ready = true;
   }
 
@@ -58,7 +57,6 @@ export default class Die {
       this.board.selectedDice
     );
     this.board.activeDiceContainer.append(this.element);
-    this.board.updateTurnScore();
     if (this.board.selectedDice.length === 0) {
       this.board.ready = false;
     }

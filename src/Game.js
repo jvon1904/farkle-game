@@ -16,7 +16,6 @@ export default class Game {
     this.soundEffects.startGame();
     this.players[0].activate();
     this.board.render();
-    console.log(this);
   }
 
   endGame() {
@@ -42,9 +41,6 @@ export default class Game {
     this.board.ready = true;
     this.board.resetDice();
     this.nextPlayer();
-    this.board.updateTurnScore();
-    this.board.updateTotalScore();
-    this.board.updatePlayerName();
   }
 
   rollDice() {
@@ -77,7 +73,6 @@ export default class Game {
     this.board.activeDice.forEach((die) => {
       die.roll();
     });
-    console.log(this.board.calculatePotentialScore(this.board.activeDice));
     let farkle =
       this.board.calculatePotentialScore(this.board.activeDice) === 0;
     if (farkle) {
@@ -93,7 +88,6 @@ export default class Game {
     this.board.ready = false;
     this.board.messageContainer.textContent = "You got a farkle!";
     this.activePlayer.turnScore = 0;
-    this.board.updateTurnScore();
   }
 
   setPlayers(names) {
