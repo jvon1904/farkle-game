@@ -33,6 +33,7 @@ export default class Game {
   endTurn() {
     this.soundEffects.endTurn();
     this.activePlayer.totalScore += this.activePlayer.turnScore;
+    this.activePlayer.setTotalScore();
     if (this.activePlayer.totalScore >= this.winningLimit) {
       this.winGame();
       return;
@@ -88,6 +89,7 @@ export default class Game {
     this.board.ready = false;
     this.board.messageContainer.textContent = "You got a farkle!";
     this.activePlayer.turnScore = 0;
+    this.activePlayer.setTurnScore();
   }
 
   setPlayers(names) {

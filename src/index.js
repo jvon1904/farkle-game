@@ -1,5 +1,7 @@
 import Game from "./Game.js";
+import SoundEffects from "./SoundEffects.js";
 
+const soundEffect = new SoundEffects();
 const body = document.querySelector("body");
 const toggleSwitch = document.querySelector(".switch");
 const toggleCircle = document.querySelector(".circle");
@@ -10,18 +12,20 @@ const addPlayerButton = document.getElementById("btn-add-player");
 const startButton = document.getElementById("btn-start");
 
 addPlayerButton.addEventListener("click", () => {
+  soundEffect.select();
   let numPlayers = namesContainer.children.length;
   let container = document.createElement("div");
   container.classList.add("name-input-container");
-  let label = document.createElement("label");
-  label.textContent = "Name: ";
-  label.setAttribute("for", `name-input-${numPlayers + 1}`);
-  label.setAttribute("maxlength", "20");
   let input = document.createElement("input");
+  input.classList.add("input-added");
   input.setAttribute("type", "text");
   input.id = `name-input-${numPlayers + 1}`;
-  container.appendChild(label);
+  input.setAttribute("placeholder", `player ${numPlayers + 1} name...`);
+  let btnDelete = document.createElement("button");
+  btnDelete.classList.add("btn-delete");
+  btnDelete.textContent = "X";
   container.appendChild(input);
+  container.appendChild(btnDelete);
   namesContainer.appendChild(container);
   if (namesContainer.children.length >= 4) {
     addPlayerButton.classList.add("hidden");
@@ -39,6 +43,7 @@ startButton.addEventListener("click", () => {
     inputs.forEach((input) => (input.value = ""));
     game.startGame();
   } catch (e) {
+    soundEffect.error();
     messageContainer.textContent = e;
     console.log(e);
   }

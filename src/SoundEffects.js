@@ -11,38 +11,47 @@ export default class SoundEffects {
   }
 
   roll() {
+    this.rollEffect.currentTime = 0;
     this.rollEffect.play();
   }
 
   farkle() {
+    this.farkleEffect.currentTime = 0;
     this.farkleEffect.play();
   }
 
   endTurn() {
+    this.endTurnEffect.currentTime = 0;
     this.endTurnEffect.play();
   }
 
   select() {
+    this.selectDeselectEffect.currentTime = 0;
     this.selectDeselectEffect.play();
   }
 
   deselect() {
+    this.selectDeselectEffect.currentTime = 0;
     this.selectDeselectEffect.play();
   }
 
   error() {
+    this.errorEffect.currentTime = 0;
     this.errorEffect.play();
   }
 
   startGame() {
+    this.startGameEffect.currentTime = 0;
     this.startGameEffect.play();
   }
 
   winGame() {
+    this.winGameEffect.currentTime = 0;
     this.winGameEffect.play();
   }
 
   endGame() {
+    this.endGameEffect.currentTime = 0;
     this.endGameEffect.play();
   }
 }

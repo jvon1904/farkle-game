@@ -36,9 +36,7 @@ export default class Die {
     this.selected = true;
     this.board.activeSelectedDiceGroup.append(this.element);
     this.element.classList.add("selected");
-    this.board.game.activePlayer.turnScore = this.board.calculatePotentialScore(
-      this.board.selectedDice
-    );
+    this.updateScore();
     this.board.ready = true;
   }
 
@@ -53,13 +51,18 @@ export default class Die {
     this.active = true;
     this.selected = false;
     this.element.classList.remove("selected");
-    this.board.game.activePlayer.turnScore = this.board.calculatePotentialScore(
-      this.board.selectedDice
-    );
     this.board.activeDiceContainer.append(this.element);
+    this.updateScore();
     if (this.board.selectedDice.length === 0) {
       this.board.ready = false;
     }
+  }
+
+  updateScore() {
+    this.board.game.activePlayer.turnScore = this.board.calculatePotentialScore(
+      this.board.selectedDice
+    );
+    this.board.game.activePlayer.setTurnScore();
   }
 
   drawDie() {

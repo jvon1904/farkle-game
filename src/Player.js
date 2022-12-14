@@ -9,13 +9,11 @@ export default class Player {
     this.nameContainer = this.drawNameContainer();
     this.nameDisplay = this.setNameDisplay();
     this.turnScoreContainer = this.drawTurnScoreContainer();
-    this.turnScoreDisplay = this.setTurnScore();
     this.totalScoreContainer = this.drawTotalScoreContainer();
-    this.totalScoreDisplay = this.setTotalScore();
     this.infoContainer = this.drawInfoContainer();
     this.drawName();
-    this.drawTurnScore(this.turnScore);
-    this.drawTotalScore(this.totalScore);
+    this.setTotalScore(0);
+    this.setTurnScore(0);
   }
 
   activate() {
@@ -35,19 +33,15 @@ export default class Player {
   }
 
   setTurnScore() {
-    return document.getElementById(`player-${this.index}-turn-score`);
-  }
-
-  drawTurnScore(score) {
-    this.setTurnScore().textContent = score;
+    let display = document.getElementById(`player-${this.index}-turn-score`);
+    display.textContent = this.turnScore;
   }
 
   setTotalScore() {
-    return document.getElementById(`player-${this.index}-total-score`);
-  }
-
-  drawTotalScore(score) {
-    this.setTotalScore().textContent = score;
+    let display = document.getElementById(`player-${this.index}-total-score`);
+    display.textContent = this.totalScore;
+    this.turnScore = 0;
+    this.setTurnScore();
   }
 
   drawNameContainer() {
