@@ -35,6 +35,7 @@ export default class Die {
     this.active = false;
     this.selected = true;
     this.board.activeSelectedDiceGroup.append(this.element);
+    this.board.activeSelectedDiceObjectGroup.push(this);
     this.element.classList.add("selected");
     this.updateScore();
     this.board.ready = true;
@@ -50,6 +51,12 @@ export default class Die {
     this.board.game.soundEffects.deselect();
     this.active = true;
     this.selected = false;
+    let newGroup = this.board.activeSelectedDiceObjectGroup.filter(
+      (die) => die.index !== this.index
+    );
+    this.board.selectedDiceObjectGroups[
+      this.board.selectedDiceObjectGroups.length - 1
+    ] = newGroup;
     this.element.classList.remove("selected");
     this.board.activeDiceContainer.append(this.element);
     this.updateScore();
@@ -59,9 +66,7 @@ export default class Die {
   }
 
   updateScore() {
-    this.board.game.activePlayer.turnScore = this.board.calculatePotentialScore(
-      this.board.selectedDice
-    );
+    this.board.game.activePlayer.turnScore = this.board.calculateTurnScore();
     this.board.game.activePlayer.setTurnScore();
   }
 

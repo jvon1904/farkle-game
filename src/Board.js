@@ -15,6 +15,7 @@ export default class Board {
       "selected-dice-container"
     );
     this.selectedDiceGroups = [];
+    this.selectedDiceObjectGroups = [];
     this.buttonWrapper = document.getElementById("btn-wrapper");
     this.endGameButton = this.setEndGameButton();
     this.endTurnButton = this.setEndTurnButton();
@@ -53,6 +54,7 @@ export default class Board {
     this.dice = [];
     this.activeDiceContainer.innerHTML = "";
     this.selectedDiceContainer.innerHTML = "";
+    this.selectedDiceObjectGroups = [];
     this.dice = this.setDice();
     this.activeDice.forEach((die) => {
       this.activeDiceContainer.appendChild(die.element);
@@ -67,8 +69,21 @@ export default class Board {
     this.selectedDiceContainer.appendChild(element);
   }
 
+  addSelectedDiceObjectGroup() {
+    this.selectedDiceObjectGroups.push([]);
+  }
+
   calculatePotentialScore(dice) {
     return new Parser(dice).calculate();
+  }
+
+  calculateTurnScore() {
+    let score = 0;
+    this.selectedDiceObjectGroups.forEach((group) => {
+      score += new Parser(group).calculate();
+    });
+
+    return score;
   }
 
   get activeDice() {
@@ -81,6 +96,12 @@ export default class Board {
 
   get activeSelectedDiceGroup() {
     return this.selectedDiceGroups[this.selectedDiceGroups.length - 1];
+  }
+
+  get activeSelectedDiceObjectGroup() {
+    return this.selectedDiceObjectGroups[
+      this.selectedDiceObjectGroups.length - 1
+    ];
   }
 
   // Link buttons to HTML elements

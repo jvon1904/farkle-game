@@ -80,6 +80,7 @@ export default class Game {
       return this.farkle();
     }
     this.board.addSelectedDiceGroup();
+    this.board.addSelectedDiceObjectGroup();
     this.board.ready = false;
   }
 
