@@ -86,6 +86,28 @@ export default class Board {
     return score;
   }
 
+  checkBonus() {
+    let bonus = new Parser(this.activeDice).calculateSix();
+    if (bonus) {
+      this.game.soundEffects.bonus();
+      this.game.activePlayer.bonusScore += bonus;
+      this.game.activePlayer.setTurnScore();
+      this.activeDice.forEach((die) => {
+        die.element.classList.add("bonus");
+      });
+      this.messageContainer.textContent = "Bonus Roll!";
+      this.ready = true;
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  updateScore() {
+    this.game.activePlayer.turnScore = this.calculateTurnScore();
+    this.game.activePlayer.setTurnScore();
+  }
+
   get activeDice() {
     return this.dice.filter((die) => die.active);
   }

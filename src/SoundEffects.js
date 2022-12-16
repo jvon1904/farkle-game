@@ -54,4 +54,9 @@ export default class SoundEffects {
     this.endGameEffect.currentTime = 0;
     this.endGameEffect.play();
   }
+
+  bonus() {
+    this.startGameEffect.currentTime = 0;
+    this.startGameEffect.play();
+  }
 }

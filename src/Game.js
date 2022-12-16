@@ -70,18 +70,19 @@ export default class Game {
         "You must select scoring dice before rolling again.";
       return;
     }
+    this.board.ready = false;
     this.soundEffects.roll();
     this.board.activeDice.forEach((die) => {
       die.roll();
     });
     let farkle =
       this.board.calculatePotentialScore(this.board.activeDice) === 0;
+    let bonus = this.board.checkBonus();
     if (farkle) {
       return this.farkle();
     }
     this.board.addSelectedDiceGroup();
     this.board.addSelectedDiceObjectGroup();
-    this.board.ready = false;
   }
 
   farkle() {

@@ -10,6 +10,7 @@ export default class Die {
   }
 
   roll() {
+    this.element.classList.remove("bonus");
     const num = Math.floor(Math.random() * 6) + 1;
     for (let dot of this.dots) {
       dot.classList.remove("dice-1");
@@ -37,7 +38,7 @@ export default class Die {
     this.board.activeSelectedDiceGroup.append(this.element);
     this.board.activeSelectedDiceObjectGroup.push(this);
     this.element.classList.add("selected");
-    this.updateScore();
+    this.board.updateScore();
     this.board.ready = true;
   }
 
@@ -59,15 +60,10 @@ export default class Die {
     ] = newGroup;
     this.element.classList.remove("selected");
     this.board.activeDiceContainer.append(this.element);
-    this.updateScore();
+    this.board.updateScore();
     if (this.board.selectedDice.length === 0) {
       this.board.ready = false;
     }
-  }
-
-  updateScore() {
-    this.board.game.activePlayer.turnScore = this.board.calculateTurnScore();
-    this.board.game.activePlayer.setTurnScore();
   }
 
   drawDie() {

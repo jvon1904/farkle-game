@@ -257,6 +257,10 @@ input:hover {
   /* transition: 0.5s; */
 }
 
+.bonus {
+  background-color: hsl(40, 75%, 50%);
+}
+
 .dice:hover {
   box-shadow: 3px 3px black, 3px 3px 3px black;
   transition: 0s;

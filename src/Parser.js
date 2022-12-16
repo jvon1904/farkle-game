@@ -19,7 +19,8 @@ export default class Parser {
   calculate() {
     switch (this.dice.length) {
       case 6:
-        return this.calculateSix();
+        let resp = this.calculateSix();
+        return resp || this.calculateFive();
       case 5:
         return this.calculateFive();
       case 4:
@@ -31,6 +32,8 @@ export default class Parser {
     }
   }
 
+  // This method is shared with the normal score flow, as well as a way to 
+  // see if all six dice are scored to allow the user another turn.
   calculateSix() {
     if (this.sixOfAKind()) {
       return 3000;
@@ -48,7 +51,7 @@ export default class Parser {
       return 1500;
     }
 
-    return this.calculateFive();
+    return false;
   }
 
   calculateFive() {

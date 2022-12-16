@@ -5,6 +5,7 @@ export default class Player {
     this.active = false;
     this.previousTurnScore = 0;
     this.turnScore = 0;
+    this.bonusScore = 0;
     this.totalScore = 0;
     this.nameContainer = this.drawNameContainer();
     this.nameDisplay = this.setNameDisplay();
@@ -34,7 +35,7 @@ export default class Player {
 
   setTurnScore() {
     let display = document.getElementById(`player-${this.index}-turn-score`);
-    display.textContent = this.turnScore;
+    display.textContent = this.turnScore + this.bonusScore;
   }
 
   setTotalScore() {
