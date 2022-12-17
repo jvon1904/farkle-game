@@ -86,15 +86,69 @@ export default class Board {
     return score;
   }
 
-  checkBonus() {
-    let bonus = new Parser(this.activeDice).calculateSix();
+  checkBonusOnSelect() {
+    if (this.selectedDice.length < 6) {
+      return;
+    }
+    let bonus = false;
+    this.selectedDiceObjectGroups.forEach((group) => {
+      console.log(group);
+      let goal = group.length;
+      let parser = new Parser(group);
+      parser.calculate();
+      console.log(parser);
+      let scoringDice = parser.scoringDice;
+      console.log("goal: ", goal);
+      console.log("scoringDice: ", scoringDice);
+      if (scoringDice >= goal) {
+        bonus = true;
+      } else {
+        bonus = false;
+        return;
+      }
+    });
+    console.log("bonus: ", bonus);
     if (bonus) {
+      console.log("hello bonus!");
       this.game.soundEffects.bonus();
-      this.game.activePlayer.bonusScore += bonus;
+      this.game.activePlayer.bonusScore += this.game.activePlayer.turnScore;
+      this.game.activePlayer.turnScore = 0;
       this.game.activePlayer.setTurnScore();
-      this.activeDice.forEach((die) => {
+      this.dice.forEach((die) => {
+        die.selected = false;
+        die.active = true;
         die.element.classList.add("bonus");
+        die.element.classList.remove("selected");
+        this.activeDiceContainer.append(die.element);
       });
+      this.selectedDiceGroups = [];
+      this.selectedDiceObjectGroups = [];
+      this.messageContainer.textContent = "Bonus Roll!";
+      this.ready = true;
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  checkBonusOnRoll() {
+    let parser = new Parser(this.activeDice);
+    parser.calculate();
+    let scoringDice = parser.scoringDice;
+    if (scoringDice >= 6) {
+      this.game.soundEffects.bonus();
+      this.game.activePlayer.bonusScore += this.calculatePotentialScore(
+        this.activeDice
+      );
+      this.game.activePlayer.turnScore = 0;
+      this.game.activePlayer.setTurnScore();
+      this.dice.forEach((die) => {
+        die.element.classList.add("bonus");
+        die.element.classList.remove("selected");
+        this.activeDiceContainer.append(die.element);
+      });
+      this.selectedDiceGroups = [];
+      this.selectedDiceObjectGroups = [];
       this.messageContainer.textContent = "Bonus Roll!";
       this.ready = true;
       return true;

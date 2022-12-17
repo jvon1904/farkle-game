@@ -1,6 +1,7 @@
 export default class Parser {
   constructor(dice) {
     this.dice = dice;
+    this.scoringDice = 0;
     this.frequecyMap = this.getFrequencyMap();
     this.frequecies = this.getFrequencies();
     this.timesFive = null;
@@ -19,8 +20,7 @@ export default class Parser {
   calculate() {
     switch (this.dice.length) {
       case 6:
-        let resp = this.calculateSix();
-        return resp || this.calculateFive();
+        return this.calculateSix();
       case 5:
         return this.calculateFive();
       case 4:
@@ -32,32 +32,47 @@ export default class Parser {
     }
   }
 
-  // This method is shared with the normal score flow, as well as a way to 
+  // This method is shared with the normal score flow, as well as a way to
   // see if all six dice are scored to allow the user another turn.
   calculateSix() {
     if (this.sixOfAKind()) {
+      this.scoringDice += 6;
       return 3000;
     }
     if (this.twoTriplets()) {
+      this.scoringDice += 6;
       return 2500;
     }
     if (this.threePairs()) {
+      this.scoringDice += 6;
       return 1500;
     }
     if (this.straight()) {
+      this.scoringDice += 6;
       return 1500;
     }
     if (this.fourAndTwo()) {
+      this.scoringDice += 6;
       return 1500;
     }
 
-    return false;
+    return this.calculateFive();
   }
 
   calculateFive() {
     if (this.fiveOfAKind()) {
-      let dice = this.diceOtherThan(this.timesFive);
-      return 2000 + new Parser(dice).calculate();
+      this.scoringDice += 5;
+      let leftOverDice = this.diceOtherThan(this.timesFive);
+      let leftOverAmount = 0;
+      leftOverDice.forEach((die) => {
+        let amount = new Parser([die]).calculate();
+        if (amount > 0) {
+          this.scoringDice += 1;
+        }
+        leftOverAmount += amount;
+      });
+
+      return 2000 + leftOverAmount;
     }
 
     return this.calculateFour();
@@ -65,8 +80,18 @@ export default class Parser {
 
   calculateFour() {
     if (this.fourOfAKind()) {
-      let dice = this.diceOtherThan(this.timesFour);
-      return 1000 + new Parser(dice).calculate();
+      this.scoringDice += 4;
+      let leftOverDice = this.diceOtherThan(this.timesFour);
+      let leftOverAmount = 0;
+      leftOverDice.forEach((die) => {
+        let amount = new Parser([die]).calculate();
+        if (amount > 0) {
+          this.scoringDice += 1;
+        }
+        leftOverAmount += amount;
+      });
+
+      return 1000 + leftOverAmount;
     }
 
     return this.calculateThree();
@@ -74,17 +99,28 @@ export default class Parser {
 
   calculateThree() {
     if (this.threeOfAKind()) {
-      let dice = this.diceOtherThan(this.timesThree);
-      return (
-        this.threeOfAKindMap.get(this.timesThree) + new Parser(dice).calculate()
-      );
+      this.scoringDice += 3;
+      let leftOverDice = this.diceOtherThan(this.timesThree);
+      let leftOverAmount = 0;
+      leftOverDice.forEach((die) => {
+        let amount = new Parser([die]).calculate();
+        if (amount > 0) {
+          this.scoringDice += 1;
+        }
+        leftOverAmount += amount;
+      });
+
+      return this.threeOfAKindMap.get(this.timesThree) + leftOverAmount;
     }
 
     return this.calculateTwoOrOne();
   }
 
   calculateTwoOrOne() {
-    return this.frequecyMap.get(1) * 100 + this.frequecyMap.get(5) * 50;
+    let numberOfOnes = this.frequecyMap.get(1);
+    let numberOfFives = this.frequecyMap.get(5);
+    this.scoringDice += numberOfOnes + numberOfFives;
+    return numberOfOnes * 100 + numberOfFives * 50;
   }
 
   diceOtherThan(num) {

@@ -42,6 +42,7 @@ export default class Player {
     let display = document.getElementById(`player-${this.index}-total-score`);
     display.textContent = this.totalScore;
     this.turnScore = 0;
+    this.bonusScore = 0;
     this.setTurnScore();
   }
 

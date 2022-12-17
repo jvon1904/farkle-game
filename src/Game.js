@@ -32,7 +32,8 @@ export default class Game {
 
   endTurn() {
     this.soundEffects.endTurn();
-    this.activePlayer.totalScore += this.activePlayer.turnScore;
+    this.activePlayer.totalScore +=
+      this.activePlayer.turnScore + this.activePlayer.bonusScore;
     this.activePlayer.setTotalScore();
     if (this.activePlayer.totalScore >= this.winningLimit) {
       this.winGame();
@@ -77,7 +78,7 @@ export default class Game {
     });
     let farkle =
       this.board.calculatePotentialScore(this.board.activeDice) === 0;
-    let bonus = this.board.checkBonus();
+    this.board.checkBonusOnRoll();
     if (farkle) {
       return this.farkle();
     }
@@ -91,6 +92,7 @@ export default class Game {
     this.board.ready = false;
     this.board.messageContainer.textContent = "You got a farkle!";
     this.activePlayer.turnScore = 0;
+    this.activePlayer.bonusScore = 0;
     this.activePlayer.setTurnScore();
   }
 
@@ -125,5 +127,6 @@ export default class Game {
     this.players[nextIndex].activate();
     this.activePlayer.previousTurnScore = 0;
     this.activePlayer.turnScore = 0;
+    this.activePlayer.bonusScore = 0;
   }
 }

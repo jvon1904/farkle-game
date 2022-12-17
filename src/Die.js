@@ -39,6 +39,7 @@ export default class Die {
     this.board.activeSelectedDiceObjectGroup.push(this);
     this.element.classList.add("selected");
     this.board.updateScore();
+    this.board.checkBonusOnSelect();
     this.board.ready = true;
   }
 

@@ -45,7 +45,6 @@ startButton.addEventListener("click", () => {
   } catch (e) {
     soundEffect.error();
     messageContainer.textContent = e;
-    console.log(e);
   }
 });
 

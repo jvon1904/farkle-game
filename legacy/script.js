@@ -75,7 +75,6 @@ function farkle() {
   playArea.style.backgroundColor = "red";
   holdButton.classList.add("hide");
   rollButton.style.backgroundColor = "orange";
-  console.log("farkle");
 }
 
 //remove active class function
