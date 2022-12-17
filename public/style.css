@@ -503,8 +503,13 @@ input:hover {
   min-width: 100px;
 }
 
-.player-info {
-  box-shadow: 10px;
+div.active {
+  background-color: hsl(40, 75%, 50%);
+}
+
+div.player-info {
+  width: 500px;
+  border-radius: 10px 10px 0px 0px;
 }
 
 .player-info > div {
@@ -513,17 +518,12 @@ input:hover {
 }
 
 .player-name-container {
-  width: 100%;
   background-color: rgb(79, 93, 170);
-  border-radius: 10px 10px 0px 0px;
-  padding-left: 0.75rem;
-  padding-right: 0.75rem;
   display: flex;
   justify-content: center;
   align-items: stretch;
   color: white;
   font-weight: bold;
-  display: flex;
 }
 
 .dark > #footer {

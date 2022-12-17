@@ -19,10 +19,12 @@ export default class Player {
 
   activate() {
     this.active = true;
+    this.infoContainer.classList.add("active");
   }
 
   deactivate() {
     this.active = false;
+    this.infoContainer.classList.remove("active");
   }
 
   setNameDisplay() {
