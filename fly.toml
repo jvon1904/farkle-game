@@ -1,7 +1,6 @@
-# fly.toml file generated for gostatic-example on 2022-03-01T14:38:17-05:00
+# fly.toml file generated for farkle-game on 2022-12-16T23:13:29-05:00
 
-app = "gostatic-example"
-
+app = "farkle-game"
 kill_signal = "SIGINT"
 kill_timeout = 5
 processes = []
@@ -18,7 +17,6 @@ processes = []
   processes = ["app"]
   protocol = "tcp"
   script_checks = []
-
   [services.concurrency]
     hard_limit = 25
     soft_limit = 20

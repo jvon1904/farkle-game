@@ -20,10 +20,11 @@ addPlayerButton.addEventListener("click", () => {
   input.classList.add("input-added");
   input.setAttribute("type", "text");
   input.id = `name-input-${numPlayers + 1}`;
-  input.setAttribute("placeholder", `player ${numPlayers + 1} name...`);
-  let btnDelete = document.createElement("button");
+  input.setAttribute("placeholder", `player name...`);
+  let btnDelete = document.createElement("div");
   btnDelete.classList.add("btn-delete");
   btnDelete.textContent = "X";
+  btnDelete.addEventListener("click", removePlayer);
   container.appendChild(input);
   container.appendChild(btnDelete);
   namesContainer.appendChild(container);
@@ -35,10 +36,9 @@ addPlayerButton.addEventListener("click", () => {
 startButton.addEventListener("click", () => {
   try {
     messageContainer.textContent = "";
-    // const names = nameInput.value;
     const names = [];
     const inputs = document.querySelectorAll("input");
-    inputs.forEach((input) => names.push(input.value));
+    inputs.forEach((input) => names.push(input.value.trim()));
     const game = new Game(names);
     inputs.forEach((input) => (input.value = ""));
     game.startGame();
@@ -53,3 +53,10 @@ toggleSwitch.addEventListener("click", () => {
   toggleSwitch.classList.toggle("switchOn");
   body.classList.toggle("dark");
 });
+
+function removePlayer(e) {
+  let container = e.target.parentElement;
+  container.remove();
+  soundEffect.select();
+  addPlayerButton.classList.remove("hidden");
+}

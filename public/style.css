@@ -11,6 +11,7 @@ body {
 .dark {
   background-color: black;
   transition: 0.1s;
+  color: white;
 }
 .hidden {
   display: none !important;
@@ -92,6 +93,7 @@ h3 {
 }
 
 #message-container {
+  height: 20px;
   display: flex;
   justify-content: center;
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
@@ -195,41 +197,47 @@ input:hover {
 
 .name-input-container {
   padding-right: 0;
+  display: flex;
+  justify-content: stretch;
+  align-items: stretch;
 }
 
 .name-input-container > input {
   margin: 0;
   margin-bottom: 10px;
-  width: 91%;
+}
+
+.name-input-container > div {
+  margin-bottom: 10px;
 }
 
 .name-input-container > input:hover {
   box-shadow: none !important;
 }
 
-.input-added {
-  border-radius: 10px 0px 0px 10px;
-  width: 81% !important;
-}
-
-.name-input-container > button {
-  border-radius: 0px 10px 10px 0px;
-  margin-left: 0;
+.btn-delete {
+  background-color: maroon;
+  border-radius: 0 10px 10px 0;
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+  display: flex;
+  align-items: center;
   padding-left: 5px;
   padding-right: 5px;
-  background-color: darkred;
-  color: white;
-  font-weight: bold;
-  font-family: "Courier New", Courier, monospace;
-  margin-right: 0;
-  position: relative;
-  top: -1px;
-  box-shadow: none;
+}
+
+.btn-delete:hover {
+  cursor: pointer;
+}
+
+.input-added {
+  border-radius: 10px 0px 0px 10px;
 }
 
 .name-input-container > button:hover {
   box-shadow: none;
 }
+
 .text {
   font-size: 2rem;
   font-style: italic;
@@ -508,7 +516,7 @@ div.active {
 }
 
 div.player-info {
-  width: 500px;
+  width: 400px;
   border-radius: 10px 10px 0px 0px;
 }
 
@@ -528,5 +536,5 @@ div.player-info {
 
 .dark > #footer {
   color: white;
-  background-color: hsl(40, 75%, 10%);
+  background-color: hsl(40, 6%, 6%);
 }
