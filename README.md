@@ -1,5 +1,5 @@
 ### The greatest game ever!
 
 ```javascript
-  const GreatestGame = this;
+const GreatestGame = this;
 ```
